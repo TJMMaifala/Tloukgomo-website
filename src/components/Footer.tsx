@@ -81,7 +81,19 @@ export default function Footer() {
         </div>
 
         <div className="mt-16 flex flex-col items-start justify-between gap-5 border-t border-white/10 pt-8 text-sm text-concrete-400 sm:flex-row sm:items-center">
-          <p>© 2026 {company.legalName}. All Rights Reserved.</p>
+          <p>
+            © 2026 {company.legalName}. All Rights Reserved.{' '}
+            Website created by{' '}
+            <a
+              href="https://www.instagram.com/thabo_maifala/?hl=en"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-concrete-300 transition-colors hover:text-copper-400"
+            >
+              Thabo Maifala
+            </a>
+            .
+          </p>
           <a href="#home" className="group inline-flex items-center gap-2 font-display text-sm font-semibold uppercase tracking-wider2 text-concrete-300 hover:text-white" aria-label="Back to top">
             Back to top <ArrowUp className="h-4 w-4 text-copper-400 transition-transform group-hover:-translate-y-1" aria-hidden="true" />
           </a>

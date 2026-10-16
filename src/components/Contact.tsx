@@ -97,25 +97,13 @@ export default function Contact() {
     }
     const endpoint = import.meta.env.VITE_FORM_ENDPOINT
     try {
-      if (endpoint) {
-        const res = await fetch(endpoint, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify(payload),
-        })
-        if (!res.ok) throw new Error('Request failed')
-      } else {
-        const body = [
-          `Name: ${payload.name}`,
-          `Company: ${payload.company || '-'}`,
-          `Email: ${payload.email}`,
-          `Phone: ${payload.phone}`,
-          `Service required: ${payload.service}`,
-          '',
-          payload.details,
-        ].join('\n')
-        window.location.href = `mailto:${company.email}?subject=${encodeURIComponent('Website enquiry — ' + payload.service)}&body=${encodeURIComponent(body)}`
-      }
+      if (!endpoint) throw new Error('VITE_FORM_ENDPOINT is not configured')
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(payload),
+      })
+      if (!res.ok) throw new Error('Request failed')
       setStatus('sent')
       setValues(empty)
     } catch {

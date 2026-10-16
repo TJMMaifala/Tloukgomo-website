@@ -44,15 +44,17 @@ Requires Node 18+.
 
 | Variable | Required | Purpose |
 |---|---|---|
-| `VITE_FORM_ENDPOINT` | No | URL that receives the enquiry form as a JSON `POST` (Formspree, Getform, Basin, or your own API). |
+| `VITE_FORM_ENDPOINT` | Yes | Form endpoint that receives the enquiry form as a JSON `POST`. Set the Formspree notification recipient to `pontshooxtail@gmail.com`. |
 
-If `VITE_FORM_ENDPOINT` is empty, submitting the form opens the visitor's email app with a pre-filled message to `charles@tloukgomo.co.za`. For reliable lead capture, create a free Formspree form and put its URL in `.env` (locally) and in your host's environment settings.
+Set `VITE_FORM_ENDPOINT` in `.env.local` for local development and in your hosting provider's environment settings for production. Form submissions are sent to the configured endpoint; if it is missing or rejects the submission, the form reports an error and provides the business email as a fallback contact.
 
 ## Deployment
 
 **Vercel**: push to GitHub, then vercel.com → *Add New Project* → import the repo. Framework preset: Vite (auto-detected). Build `npm run build`, output `dist`. Add `VITE_FORM_ENDPOINT` under *Settings → Environment Variables*. Or use the CLI: `npx vercel --prod`.
 
 **Netlify**: push to GitHub, then app.netlify.com → *Add new site → Import an existing project*. `netlify.toml` already sets the build command and publish directory. Add `VITE_FORM_ENDPOINT` under *Site configuration → Environment variables*. Or drag the `dist/` folder onto app.netlify.com/drop after `npm run build`.
+
+**Cloudflare Pages**: in the Cloudflare dashboard, open the Pages project and add `VITE_FORM_ENDPOINT` with the Formspree URL under *Settings → Variables and Secrets* for the Production environment. Set it for Preview too if preview deployments should accept enquiries. Save the variable and trigger a new deployment so Vite includes it in the built site.
 
 After you have a domain, update `og:image` / `twitter:image` in `index.html` to absolute URLs (e.g. `https://yourdomain.co.za/images/hero-foundation.jpg`) so link previews work on WhatsApp, LinkedIn and Facebook, and add `<link rel="canonical" href="https://yourdomain.co.za/" />`.
 
